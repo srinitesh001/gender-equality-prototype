@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeZone & EqualVoice</title>
+  <!-- Tailwind CSS for UI styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Leaflet CSS for Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col font-sans">
+
+  <!-- Header / Navigation -->
+  <nav class="bg-slate-800 border-b border-slate-700 p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-rose-500 tracking-wide">🛡️ SafeZone & EqualVoice</h1>
+    <span class="text-xs bg-rose-500/20 text-rose-300 border border-rose-500/30 px-3 py-1 rounded-full">Live Prototype</span>
+  </nav>
+
+  <!-- Main 3-Column Dashboard -->
+  <main class="flex-1 p-4 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto w-full">
+    
+    <!-- Column 1: SOS Trigger (Person 2's Section) -->
+    <section class="bg-slate-800 border border-slate-700 rounded-xl p-5 flex flex-col items-center justify-center text-center shadow-lg">
+      <h2 class="text-lg font-semibold text-rose-400 mb-2">Emergency SOS Trigger</h2>
+      <p class="text-xs text-slate-400 mb-6">Triggers instant location capture & records panic audio snippet.</p>
+      
+      <button id="sosBtn" onclick="triggerSOS()" class="w-40 h-40 rounded-full bg-rose-600 hover:bg-rose-500 active:scale-95 text-white font-extrabold text-2xl shadow-red-900/50 shadow-2xl transition duration-150 flex flex-col items-center justify-center border-4 border-rose-400">
+        <span>SOS</span>
+        <span class="text-xs font-normal mt-1">HOLD / CLICK</span>
+      </button>
+
+      <div id="sosStatus" class="mt-6 text-sm text-slate-300 hidden">
+        <p id="geoOutput" class="text-xs font-mono bg-slate-900 p-2 rounded border border-slate-700 text-emerald-400 mb-2"></p>
+        <p id="audioStatus" class="text-xs text-amber-400"></p>
+      </div>
+    </section>
+
+    <!-- Column 2: Safety Map (Person 3's Section) -->
+    <section class="bg-slate-800 border border-slate-700 rounded-xl p-5 flex flex-col shadow-lg">
+      <h2 class="text-lg font-semibold text-blue-400 mb-1">Interactive Safety Map</h2>
+      <p class="text-xs text-slate-400 mb-3">Green: Safe Zones | Red: High Alert Areas</p>
+      <div id="map" class="w-full h-64 rounded-lg border border-slate-700 bg-slate-900"></div>
+    </section>
+
+    <!-- Column 3: Incident Portal (Person 3's Section) -->
+    <section class="bg-slate-800 border border-slate-700 rounded-xl p-5 flex flex-col shadow-lg">
+      <h2 class="text-lg font-semibold text-emerald-400 mb-1">Anonymous Incident Portal</h2>
+      <p class="text-xs text-slate-400 mb-4">Log safety issues or workplace discrimination discreetly.</p>
+      
+      <form id="incidentForm" class="space-y-3">
+        <input type="text" id="incLocation" placeholder="Location / Department" required class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-sm focus:outline-none focus:border-emerald-500 text-slate-100">
+        <select id="incType" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-sm focus:outline-none focus:border-emerald-500 text-slate-300">
+          <option>Poor Lighting / Unsafe Zone</option>
+          <option>Workplace Harassment</option>
+          <option>Pay / Role Inequality</option>
+          <option>Verbal Abuse / Stalking</option>
+        </select>
+        <textarea id="incDesc" placeholder="Brief description..." rows="2" required class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-sm focus:outline-none focus:border-emerald-500 text-slate-100"></textarea>
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-2 rounded text-sm transition">Submit Anonymous Report</button>
+      </form>
+
+      <div class="mt-4 flex-1 overflow-y-auto max-h-36">
+        <h3 class="text-xs font-semibold text-slate-400 mb-2">Recent Community Reports</h3>
+        <ul id="reportList" class="space-y-2 text-xs"></ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Connect your team's JavaScript files -->
+  <script src="sos.js"></script>
+  <script src="modules.js"></script>
+</body>
+</html>
